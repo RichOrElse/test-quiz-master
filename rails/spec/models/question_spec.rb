@@ -5,6 +5,7 @@ describe Question, :type => :model do
     it 'requires the correct answer' do
       expect(Question.new(answer: "Paris").is_correct?("London")).to be false
       expect(Question.new(answer: "Paris").is_correct?("Paris")).to be true
+      expect(Question.new(answer: "7").is_correct?("7")).to be true
     end
 
     it 'ignores whitespace' do

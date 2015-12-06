@@ -4,13 +4,9 @@ class Question < ActiveRecord::Base
   validates_presence_of :answer
 
   def is_correct?(submission)
-    if is_number?(submission)
-      words_for(submission.to_i.to_words) == words_for(answer)
-    elsif is_number?(answer)
-      words_for(submission) == words_for(answer.to_i.to_words)
-    else
-      words_for(submission) == words_for(answer)
-    end
+    words_for(submission) == words_for(answer) ||
+      is_number?(submission) && words_for(submission.to_i.to_words) == words_for(answer) ||
+      is_number?(answer) && words_for(submission) == words_for(answer.to_i.to_words)
   end
   
   private

@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   validates_presence_of :answer
 
   def is_correct?(submission)
-    answer == submission
+    answer.downcase == submission.downcase
   end
 
 end

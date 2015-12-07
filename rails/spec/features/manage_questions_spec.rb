@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'capybara/rspec'
 
 describe "manage questions", :type => :feature do
   before :each do
@@ -16,8 +17,8 @@ describe "manage questions", :type => :feature do
   end
   
   it "Edit question" do
-    visit '/questions/1'
-    within(".edit_question") do
+    visit '/questions/1/edit'
+    within("#edit_question_1") do
       fill_in 'Answer', :with => 'chicken'
     end
     click_button 'Update Question'

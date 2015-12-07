@@ -1,5 +1,5 @@
 class QuestionsController < ApplicationController
-  before_filter :find_question, only: [:show, :edit, :update]
+  before_filter :find_question, only: [:show, :edit, :update, :answer]
 
   def index
     @questions = Question.all
@@ -27,7 +27,12 @@ class QuestionsController < ApplicationController
   end
 
   def answer
-    # TODO
+    if @question.is_correct?(answer_params[:answer])
+      redirect_to root_path, notice: "Correct answer. Pick another question."
+    else
+      flash[:notice] = "Wrong answer. Try again."
+      render action: "show"
+    end
   end
 
   private
@@ -39,4 +44,8 @@ class QuestionsController < ApplicationController
   def question_params
     params.require(:question).permit(:question, :answer)
   end
+  
+  def answer_params
+    params.require(:answer).permit(:answer)
+  end  
 end

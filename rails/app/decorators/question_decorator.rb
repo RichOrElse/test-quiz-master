@@ -27,9 +27,10 @@ class QuestionDecorator < SimpleDelegator
   end
 
   class Collection < SimpleDelegator
-    def initialize(questions, view_context)
+    def initialize(questions, view_context, decorate = QuestionDecorator)
       @questions = questions
       @view_context = view_context
+      @decorate = decorate
       super(questions)
     end
     
@@ -37,7 +38,7 @@ class QuestionDecorator < SimpleDelegator
     
     def each
       @questions.each do |question|
-        yield QuestionDecorator[ question, @view_context ]
+        yield @decorate[ question, @view_context ]
       end
     end
   end

@@ -1,8 +1,9 @@
 class QuestionsController < ApplicationController
   before_filter :find_question, only: [:show, :edit, :update, :answer]
+  before_filter :decorate_question, only: [:show, :answer]
 
   def index
-    @questions = Question.all
+    @questions = QuestionDecorator::Collection.new(Question.all, view_context)
   end
 
   def new
@@ -36,6 +37,10 @@ class QuestionsController < ApplicationController
   end
 
   private
+
+  def decorate_question
+    @question = QuestionDecorator[ @question, view_context ]
+  end
 
   def find_question
     @question = Question.find(params[:id])

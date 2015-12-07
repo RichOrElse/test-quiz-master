@@ -21,8 +21,8 @@ class QuestionDecorator < SimpleDelegator
   end
 
   class << self
-    def [](questionaire, sanitizer)
-      new questionaire, sanitizer.method(:sanitize)
+    def [](questionnaire, sanitizer)
+      new questionnaire, sanitizer.method(:sanitize)
     end
   end
 
@@ -32,6 +32,8 @@ class QuestionDecorator < SimpleDelegator
       @view_context = view_context
       super(questions)
     end
+    
+    include Enumerable
     
     def each
       @questions.each do |question|

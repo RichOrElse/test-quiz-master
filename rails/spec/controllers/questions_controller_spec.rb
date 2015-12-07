@@ -11,16 +11,18 @@ RSpec.describe QuestionsController, :type => :controller do
     end
 
     context "when answer is correct" do
-      it "renders correct message" do
+      it "redirects to home page with correct answer message" do
         expect(question).to receive(:is_correct?) { true }
-        expect(subject.body).to include("Correct")
+        expect(subject).to redirect_to(root_path)
+        expect(flash.notice).to eql("Correct answer. Pick another question.")
       end
     end
 
     context "when answer is wrong" do
-      it "renders wrong message" do
+      it "renders wrong answer message" do
         expect(question).to receive(:is_correct?) { false }
-        expect(subject.body).to include("Wrong")
+        expect(subject).to render_template("show")
+        expect(flash.notice).to eql("Wrong answer. Try again.")
       end
     end
   end

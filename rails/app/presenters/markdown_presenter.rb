@@ -17,7 +17,7 @@ class MarkdownPresenter
   end
 
   def to_s
-  	@markdown
+    @markdown
   end
 
   class NullSanitizer

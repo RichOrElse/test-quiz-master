@@ -2,7 +2,7 @@
   %h1 Question time...
 
   .well
-    = from_markdown(@question.question).to_html
+    = present_markdown(@question.question).to_html
 
     = form_for :answer, url: answer_question_path(@question) do |f|
       .form-group

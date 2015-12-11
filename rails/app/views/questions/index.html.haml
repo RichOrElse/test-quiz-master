@@ -6,6 +6,7 @@
       %li.list-group-item
         %span.pull-right
           = link_to "edit", edit_question_path(question), class: 'btn btn-default btn-xs'
-        = link_to from_markdown(question.question).to_text, question
+        = link_to question do
+          = present_markdown(question.question).to_text
 
   = link_to "Add a new question", new_question_path, class: 'btn btn-success'

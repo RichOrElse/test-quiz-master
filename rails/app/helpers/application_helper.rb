@@ -1,5 +1,5 @@
 module ApplicationHelper
-  def from_markdown(markdown)
-  	MarkdownPresenter.new(markdown, self)
+  def present_markdown(markdown)
+    MarkdownPresenter.new(markdown, self)
   end
 end
